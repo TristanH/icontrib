@@ -130,7 +130,6 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-# TODO: use env vars for this! Also generate new keys before open sourcing (keys in repo history)
 SOCIAL_AUTH_TWITTER_KEY = os.environ['SOCIAL_AUTH_TWITTER_KEY']
 SOCIAL_AUTH_TWITTER_SECRET = os.environ['SOCIAL_AUTH_TWITTER_SECRET']
 
