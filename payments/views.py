@@ -1,7 +1,7 @@
-import braintree
 from django.shortcuts import HttpResponse
+from payments.actions import generate_client_token
 
 
-def generate_client_token(request):
-    token = braintree.ClientToken.generate()
+def client_token(request):
+    token = generate_client_token()
     return HttpResponse(token)
