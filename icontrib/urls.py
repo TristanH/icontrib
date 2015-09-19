@@ -5,6 +5,7 @@ urlpatterns = patterns('',
     url(r'^$', 'icontrib.views.home', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^logout/$', 'icontrib.views.logout'),
+    url(r'^signup/$', 'icontrib.views.signup'),
 
     url('', include('social.apps.django_app.urls', namespace='social')),
 )
