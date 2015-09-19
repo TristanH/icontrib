@@ -1,4 +1,6 @@
 import os
+from payments.actions import execute_contribution
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'icontrib.settings')
 
 from django.conf import settings
@@ -22,7 +24,8 @@ class MyStreamer(TwythonStreamer):
         if 'text' not in data or not tweeter or tweeter == "IWillContribute":
             return
 
-        twitter = Twython(settings.SOCIAL_AUTH_TWITTER_KEY, settings.SOCIAL_AUTH_TWITTER_SECRET, OAUTH_TOKEN, OAUTH_SECRET)
+        twitter = Twython(settings.SOCIAL_AUTH_TWITTER_KEY, settings.SOCIAL_AUTH_TWITTER_SECRET, OAUTH_TOKEN,
+            OAUTH_SECRET)
 
         hashtags = data.get('entities', {}).get('hashtags', [])
 
@@ -38,24 +41,38 @@ class MyStreamer(TwythonStreamer):
         campaign_hashtag = "swagyolo"  # campaign_matches[0]
 
         app_user = UserSocialAuth.objects.filter(uid=data['id_str'])
-        if app_user.exists():
-            if True: # If payment token ready and works:
-              # Make payment
-              # Update campaign, tweet about it!
-                campaign = Campaign.objects.get(hashtag=campaign_hashtag)
-                contribution = Contribution()
-                contribution.amount = campaign.contribution_amount
-                contribution.profile = app_user.user.userprofile
-            # Else:
-              # Message user, tell them to update payment info
-
+        message = "ayy lmao"
+        contribution = None
+        if not app_user.exists() or not app_user.user.userprofile.payment_verified:
+            message = "Hey @{0}! You haven't signed up for iContrib yet. " \
+                      "Make your contribution for #{1} here: " \
+                      "http://icontrib.co/signup".format(
+                tweeter, campaign_hashtag
+            )
         else:
-            message = "Hey @{0}! You haven't signed up for iContrib yet... make your contribution for #{1} here: http://icontrib.co/signup".format(tweeter, campaign_hashtag)
+            campaign = Campaign.objects.get(hashtag=campaign_hashtag)
 
-            if 'retweeted_status' in data:
-                twitter.update_status(status=message)
+            contribution = Contribution()
+            contribution.amount = campaign.contribution_amount  # TODO: un-hardcode contrib amt
+            contribution.profile = app_user.user.userprofile
+            contribution.confirmed, errors = execute_contribution(contribution.profile, contribution.amount)
+            if contribution.confirmed:
+                # contribution was successful
+                message = "Congrats! You contributed ${0} to #{1}".format(contribution.amount, campaign.hashtag)
             else:
-                twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
+                message = "Uh-oh! There was a problem with your contribution. " \
+                          "Please make sure your payment info is correct."
+                print "Error with transaction: {}".format(errors)
+            contribution.save()
+
+        if 'retweeted_status' in data:
+            result = twitter.update_status(status=message)
+        else:
+            result = twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
+
+        if contribution is not None:
+            contribution.twitter_post_link = result.get('url')
+            contribution.save()
 
     def on_error(self, status_code, data):
         print status_code
@@ -66,7 +83,8 @@ class MyStreamer(TwythonStreamer):
 
 
 def stream_mentions():
-    stream = MyStreamer(settings.SOCIAL_AUTH_TWITTER_KEY, settings.SOCIAL_AUTH_TWITTER_SECRET, OAUTH_TOKEN, OAUTH_SECRET)
+    stream = MyStreamer(settings.SOCIAL_AUTH_TWITTER_KEY, settings.SOCIAL_AUTH_TWITTER_SECRET, OAUTH_TOKEN,
+        OAUTH_SECRET)
     stream.user()
 
 while True:
