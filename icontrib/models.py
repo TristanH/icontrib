@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -55,4 +56,4 @@ class Campaign(models.Model):
 
         amount = contributions.aggregate(Sum('amount'))
 
-        return amount
+        return Decimal(amount.values()[0] or 0)

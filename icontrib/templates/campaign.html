@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h1>
+        <small>Campaign:</small>
+        #{{ campaign.hashtag }}
+    </h1>
+    {% if campaign.organizer_profile == request.user.userprofile %}
+        <span>This is your campaign</span>
+    {% endif %}
+    <p>
+        Raised:
+    </p>
+    <pre> {{ campaign.amount_raised|stringformat:".02f" }} / {{ campaign.target_amount|stringformat:".02f" }}</pre>
+{% endblock %}

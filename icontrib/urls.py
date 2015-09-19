@@ -7,7 +7,9 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'icontrib.views.logout', name='logout'),
     url(r'^setup_payment', 'icontrib.views.cc_form', name='setup_payment'),
     url(r'^done/$', 'icontrib.views.done'),
-    url(r'^create_campaign/$', 'icontrib.views.signup', name='create_campaign'),
+
+    url(r'^create_campaign/$', 'icontrib.views.create_campaign', name='create_campaign'),
+    url(r'^view_campaign/(\w+)$', 'icontrib.views.view_campaign', name='view_campaign'),
 
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^payments/', include('payments.urls', namespace='payments'))
