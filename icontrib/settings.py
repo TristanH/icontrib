@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
+    'icontrib',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +57,7 @@ ROOT_URLCONF = 'icontrib.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,6 +65,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -117,6 +121,19 @@ STATICFILES_DIRS = (
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
+
+# TODO: use env vars for this!
+SOCIAL_AUTH_TWITTER_KEY = 'msnwH9trC5TLMKoPHrL6qX933'
+SOCIAL_AUTH_TWITTER_SECRET = 'wibgMForxRvWcxDFgWUELQCp3esB8DxNvFdPKrRczWBtyr79Rx'
+
+LOGIN_REDIRECT_URL = '/'
 
 try:
     from local_settings import *
