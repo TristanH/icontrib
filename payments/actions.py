@@ -2,7 +2,6 @@ import braintree
 
 
 def link_user_braintree(user_profile, payment_method_nonce):
-    assert user_profile.braintree_customer_id == "null"
     info = dict(
         payment_method_nonce=payment_method_nonce
     )

@@ -1,5 +1,4 @@
-from django.shortcuts import HttpResponse, render
-from icontrib.models import UserProfile
+from django.shortcuts import HttpResponse, redirect
 from payments.actions import generate_client_token, link_user_braintree
 
 
@@ -14,4 +13,4 @@ def register(request):
         raise ValueError("Must register with valid user")
     payment_method_nonce = request.POST['payment_method_nonce']
     link_user_braintree(user_profile, payment_method_nonce)
-    return render(request, 'done.html')
+    return redirect('home')
