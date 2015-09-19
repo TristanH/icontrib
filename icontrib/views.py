@@ -8,3 +8,6 @@ def home(request):
 def logout(request):
     auth_logout(request)
     return redirect('home')
+
+def signup(request):
+    return render(request, 'signup_form.html')
