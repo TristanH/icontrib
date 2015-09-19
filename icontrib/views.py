@@ -11,3 +11,9 @@ def logout(request):
 
 def signup(request):
     return render(request, 'signup_form.html')
+
+def cc_form(request):
+    return render(request, 'cc_form.html')
+
+def done(request):
+    return render(request, 'done.html')
