@@ -3,7 +3,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'icontrib.settings')
 
 from django.conf import settings
 
-from icontrib.models import Campaign
+from icontrib.models import Campaign, Contribution
 
 from social.apps.django_app.default.models import UserSocialAuth
 from twython import TwythonStreamer, Twython
@@ -39,21 +39,23 @@ class MyStreamer(TwythonStreamer):
 
         app_user = UserSocialAuth.objects.filter(uid=data['id_str'])
         if app_user.exists():
-            # If payment token ready and works:
+            if True: # If payment token ready and works:
               # Make payment
               # Update campaign, tweet about it!
+                campaign = Campaign.objects.get(hashtag=campaign_hashtag)
+                contribution = Contribution()
+                contribution.amount = campaign.contribution_amount
+                contribution.profile = app_user.user.userprofile
             # Else:
               # Message user, tell them to update payment info
 
         else:
-
             message = "Hey @{0}! You haven't signed up for iContrib yet... make your contribution for #{1} here: http://icontrib.co/signup".format(tweeter, campaign_hashtag)
 
             if 'retweeted_status' in data:
                 twitter.update_status(status=message)
             else:
                 twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
-
 
     def on_error(self, status_code, data):
         print status_code
