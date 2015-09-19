@@ -8,13 +8,14 @@ from icontrib.models import Campaign, Contribution
 from social.apps.django_app.default.models import UserSocialAuth
 from twython import TwythonStreamer, Twython
 
-
-OAUTH_TOKEN = "3609988267-JYK9psor847UOYu64Tz35kg19OXLxrKoj8xKFZS"
-OAUTH_SECRET = "9qtFLClQfYm7vNeH8jMfqGzHZt3JbNmhbKwWsSPCAxfiS"
-
+OAUTH_TOKEN = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token']
+OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token_secret']
+   
 
 class MyStreamer(TwythonStreamer):
     def on_success(self, data):
+        import pdb; pdb.set_trace()
+
         tweeter = data.get('user', {}).get('screen_name')
         if not tweeter:
             tweeter = data.get('source', {}).get('screen_name')
@@ -36,7 +37,6 @@ class MyStreamer(TwythonStreamer):
         #     return
 
         campaign_hashtag = "swagyolo"  # campaign_matches[0]
-
         app_user = UserSocialAuth.objects.filter(uid=data['id_str'])
         if app_user.exists():
             if True: # If payment token ready and works:
@@ -46,6 +46,7 @@ class MyStreamer(TwythonStreamer):
                 contribution = Contribution()
                 contribution.amount = campaign.contribution_amount
                 contribution.profile = app_user.user.userprofile
+                contribution.save()
             # Else:
               # Message user, tell them to update payment info
 
@@ -59,6 +60,7 @@ class MyStreamer(TwythonStreamer):
 
     def on_error(self, status_code, data):
         print status_code
+        import pdb; pdb.set_trace()
 
         # Want to stop trying to get data because of the error?
         # Uncomment the next line!
