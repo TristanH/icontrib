@@ -9,10 +9,7 @@ from django.db.models import Sum
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
-    # Insert payment fields here
-
-    def __str__(self):
-        return "%s's profile" % self.user
+    braintree_customer_id = models.CharField(max_length=128)
 
 
 def create_user_profile(sender, instance, created, **kwargs):
