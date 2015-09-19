@@ -10,5 +10,5 @@ urlpatterns = patterns('',
     url(r'^done/$', 'icontrib.views.done'),
 
     url('', include('social.apps.django_app.urls', namespace='social')),
-    url('', include('payments.urls', namespace='payments'))
+    url(r'^payments/', include('payments.urls', namespace='payments'))
 )
