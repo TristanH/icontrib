@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render, render_to_response
+from django.shortcuts import redirect, render
 from django.contrib.auth import logout as auth_logout
 from payments.actions import generate_client_token
 
