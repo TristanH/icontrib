@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'social.apps.django_app.default',
     'icontrib',
+    'payments',
 )
 
 MIDDLEWARE_CLASSES = (

@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'icontrib.views.logout'),
 
     url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('payments.urls', namespace='payments'))
 )
