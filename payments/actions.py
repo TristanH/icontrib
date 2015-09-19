@@ -1,16 +1,16 @@
 import braintree
 
 
-def create_customer(user, payment_method_nonce, extra_info):
-    assert user.braintree_customer_id is None
+def create_customer(user_profile, payment_method_nonce, extra_info):
+    assert user_profile.braintree_customer_id is None
     info = dict(
         payment_method_nonce=payment_method_nonce
     )
     info.update(extra_info)
     result = braintree.Customer.create(info)
     if result.is_success:
-        user.braintree_customer_id = result.customer.id
-        user.save()
+        user_profile.braintree_customer_id = result.customer.id
+        user_profile.save()
     else:
         raise result.errors
     return result.is_success
