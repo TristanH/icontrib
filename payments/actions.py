@@ -1,12 +1,11 @@
 import braintree
 
 
-def create_customer(user_profile, payment_method_nonce, extra_info):
-    assert user_profile.braintree_customer_id is None
+def link_user_braintree(user_profile, payment_method_nonce):
+    assert user_profile.braintree_customer_id == "null"
     info = dict(
         payment_method_nonce=payment_method_nonce
     )
-    info.update(extra_info)
     result = braintree.Customer.create(info)
     if result.is_success:
         user_profile.braintree_customer_id = result.customer.id
@@ -17,7 +16,7 @@ def create_customer(user_profile, payment_method_nonce, extra_info):
 
 
 def execute_contribution(from_user, contribution_amount):
-    if from_user.braintree_customer_id is None:
+    if from_user.braintree_customer_id == "null":
         raise ValueError("User for transaction must have a braintree_customer_id")
     result = braintree.Transaction.sale({
         "customer_id": from_user.braintree_customer_id,

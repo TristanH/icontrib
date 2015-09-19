@@ -9,7 +9,7 @@ from django.db.models import Sum
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
-    braintree_customer_id = models.CharField(max_length=128)
+    braintree_customer_id = models.CharField(max_length=128, default="null")
 
 
 def create_user_profile(sender, instance, created, **kwargs):
