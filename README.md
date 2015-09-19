@@ -1,43 +1,7 @@
-# Heroku Django Starter Template
+# iContrib
 
-An utterly fantastic project starter template for Django 1.8.
+Raise money and contribute to worthy causes -- all through twitter!
 
-## Features
+Donating to worthy causes is not inherently social... right now no matter how you contribute (private donation, kickstarter, indiegogo), payment is a HASSLE for the user and letting your friends know you donated is an AFTERTHOUGHT. The idea behind iContrib is that contribution to worthy causes should be frictionless as possible (what's easier than writing a tweet?) and everyone should know you donated be default. 
 
-- Production-ready configuration for Static Files, Database Settings, Gunicorn, etc.
-- Enhancements to Django's static file serving functionality via WhiteNoise
-- Enhancements to Django's database functionality via django-postgrespool and dj-database-url
-
-## How to Use
-
-To use this project, follow these steps:
-
-1. Create your working environment.
-2. Install Django (`$ pip install django`)
-3. Create a new project using this template
-
-## Creating Your Project
-
-Using this template to create a new Django app is easy::
-
-    $ django-admin.py startproject --template=https://github.com/heroku/heroku-django-template/archive/master.zip --name=Procfile helloworld
-
-You can replace ``helloworld`` with your desired project name.
-
-## Deployment to Heroku
-
-    $ git init
-    $ git add -A
-    $ git commit -m "Initial commit"
-
-    $ heroku create
-    $ git push heroku master
-
-    $ heroku run python manage.py migrate
-
-## Further Reading
-
-- [Gunicorn](https://warehouse.python.org/project/gunicorn/)
-- [WhiteNoise](https://warehouse.python.org/project/whitenoise/)
-- [django-postgrespool](https://warehouse.python.org/project/django-postgrespool/)
-- [dj-database-url](https://warehouse.python.org/project/dj-database-url/)
+With iContrib, you donate to a cause by simply writing a tweet: "@IWillContribute $5 to #buildASchool".
