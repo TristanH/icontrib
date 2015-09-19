@@ -1,5 +1,10 @@
-braintree
+Django==1.8.1
+PyJWT==1.4.0
+SQLAlchemy==1.0.4
+braintree==3.20.0
 dj-database-url==0.3.0
+django-bootstrap3==6.2.2
+django-jsonview==0.4.3
 django-postgrespool==0.3.0
 django-social-auth==0.7.28
 Django==1.8.1
@@ -14,6 +19,10 @@ python-social-auth==0.2.12
 requests-oauthlib==0.5.0
 requests==2.7.0
 six==1.9.0
+swapper==0.1.1
+tweepy==3.4.0
+twitter-monitor==0.3.0
+twython==3.3.0
 SQLAlchemy==1.0.4
 whitenoise==1.0.6
 wsgiref==0.1.2
