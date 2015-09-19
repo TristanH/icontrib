@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main %}
+  <div id="signup">
+    {% if request.user and not request.user.is_anonymous %}
+      <h1>Hello, {{ request.user.get_full_name }}!</h1>
+    {% endif %}
+    <form>
+        <div class="row">
+          <label for="hashtagField">Set your campaign hashtag</label>
+          <input class="u-full-width" type="field" placeholder="ex: #CampaignForPizza" id="hashtagField">
+        </div>
+        <div class="row">
+            <label for="goalAmountField">What's your campaign goal?</label>
+            <input class="u-full-width" type="field" placeholder="ex: $1000" id="goalAmountField">
+        </div>
+        <div class="row">
+            <label for="contribAmountField">Set the default contribution</label>
+            <input class="u-full-width" type="field" placeholder="ex: $5" id="contribAmountField">
+        </div>
+        <div>
+          <input class="button-primary submit" type="submit" value="Submit">
+        </div>
+    </form>
+  </div>
+{% endblock %}
+

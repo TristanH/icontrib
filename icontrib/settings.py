@@ -136,6 +136,8 @@ SOCIAL_AUTH_TWITTER_SECRET = 'wibgMForxRvWcxDFgWUELQCp3esB8DxNvFdPKrRczWBtyr79Rx
 
 LOGIN_REDIRECT_URL = '/'
 
+STATIC_URL = '/icontrib/static/'
+
 try:
     from local_settings import *
 except ImportError:
