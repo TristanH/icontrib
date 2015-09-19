@@ -1,7 +1,17 @@
-import braintree
-from django.shortcuts import HttpResponse
+from django.shortcuts import HttpResponse, render
+from icontrib.models import UserProfile
+from payments.actions import generate_client_token, link_user_braintree
 
 
-def generate_client_token(request):
-    token = braintree.ClientToken.generate()
+def client_token(request):
+    token = generate_client_token()
     return HttpResponse(token)
+
+
+def register(request):
+    user_profile = request.user.userprofile
+    if user_profile is None:
+        raise ValueError("Must register with valid user")
+    payment_method_nonce = request.POST['payment_method_nonce']
+    link_user_braintree(user_profile, payment_method_nonce)
+    return render(request, 'done.html')

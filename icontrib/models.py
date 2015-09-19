@@ -1,5 +1,3 @@
-import json
-
 from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
@@ -9,12 +7,17 @@ from django.db.models import Sum
 class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
-    braintree_customer_id = models.CharField(max_length=128)
+    braintree_customer_id = models.CharField(max_length=128, default="null")
+
+    @property
+    def payment_verified(self):
+        return self.braintree_customer_id != 'null'
 
 
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         profile, created = UserProfile.objects.get_or_create(user=instance)
+
 
 post_save.connect(create_user_profile, sender=User)
 
@@ -35,7 +38,6 @@ class Contribution(models.Model):
 
 
 class Campaign(models.Model):
-
     # Requires braintree implementation:
     # receiving_payment_info = ....
 
