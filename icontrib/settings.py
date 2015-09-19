@@ -131,8 +131,8 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # TODO: use env vars for this! Also generate new keys before open sourcing (keys in repo history)
-SOCIAL_AUTH_TWITTER_KEY = 'msnwH9trC5TLMKoPHrL6qX933'
-SOCIAL_AUTH_TWITTER_SECRET = 'wibgMForxRvWcxDFgWUELQCp3esB8DxNvFdPKrRczWBtyr79Rx'
+SOCIAL_AUTH_TWITTER_KEY = os.environ['SOCIAL_AUTH_TWITTER_KEY']
+SOCIAL_AUTH_TWITTER_SECRET = os.environ['SOCIAL_AUTH_TWITTER_SECRET']
 
 LOGIN_REDIRECT_URL = '/'
 

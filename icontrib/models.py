@@ -41,7 +41,7 @@ class Campaign(models.Model):
     # Requires braintree implementation:
     # receiving_payment_info = ....
 
-    hashtag = models.CharField(max_length=24, null=False)
+    hashtag = models.CharField(max_length=24, null=False, unique=True)
 
     organizer_profile = models.ForeignKey('UserProfile')
 
