@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 
 {% block main %}
+    {% if request.user and not request.user.is_anonymous %}
+        <h1>Hello, {{ request.user.get_full_name }}!</h1>
+    {% endif %}
+
     <form id="checkout" action="{% url 'payments:register' %}" method="post">
         {% csrf_token %}
         <div id="payment-form"></div>

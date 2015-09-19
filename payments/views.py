@@ -9,9 +9,9 @@ def client_token(request):
 
 
 def register(request):
-    user_id = request.COOKIES['USER_ID']
-    user_profile = UserProfile.objects.get(id=user_id)
+    user_profile = request.user.userprofile
     if user_profile is None:
-        raise ValueError("Must provide valid USER_ID cookie")
-    link_user_braintree(user_profile, request.POST['payment_method_nonce'])
+        raise ValueError("Must register with valid user")
+    payment_method_nonce = request.POST['payment_method_nonce']
+    link_user_braintree(user_profile, payment_method_nonce)
     return render(request, 'done.html')
