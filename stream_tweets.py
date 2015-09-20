@@ -30,7 +30,7 @@ class MyStreamer(TwythonStreamer):
 
         hashtags = data.get('entities', {}).get('hashtags', [])
 
-        campaign_matches = {}
+        campaign_matches = []
         for hashtag_obj in hashtags:
             if Campaign.objects.filter(hashtag=hashtag_obj['text']).exists():
                 campaign_matches.append(hashtag_obj['text'])
