@@ -60,9 +60,9 @@ class MyStreamer(TwythonStreamer):
             was_charged = charge_user(campaign, app_user[0].user, twitter, data['id_str'])
             requests.post("https://hooks.slack.com/services/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", data=json.dumps({'text': "Ran charge_user for {} and #{}: charged: {} ".format(tweeter, campaign.hashtag, was_charged), }))
 
-
     def on_error(self, status_code, data):
-        requests.post("https://hooks.slack.com/services/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", data=json.dumps({'text': "Error on twitter streamer: {}".format(data), }))
+        requests.post("https://hooks.slack.com/services/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", data=json.dumps({'text': "Error on twitter streamer: {}".format(status_code), }))
+        self.disconnect()
 
 
 def stream_mentions():
