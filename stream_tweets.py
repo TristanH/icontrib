@@ -60,6 +60,7 @@ class MyStreamer(TwythonStreamer):
             contribution.profile = app_user[0].user.userprofile
             contribution.confirmed = execute_contribution(contribution.profile, contribution.amount)
             contribution.twitter_post_id = data['id_str']
+            contribution.campaign = campaign
             if contribution.confirmed:
                 # contribution was successful
                 message = "Congrats! You contributed ${0} to #{1}".format(contribution.amount, campaign.hashtag)
