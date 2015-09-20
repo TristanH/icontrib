@@ -63,7 +63,9 @@ class MyStreamer(TwythonStreamer):
             contribution.campaign = campaign
             if contribution.confirmed:
                 # contribution was successful
-                message = "Congrats! You contributed ${0} to #{1}".format(contribution.amount, campaign.hashtag)
+                message = "@{} Congrats! You contributed ${} to #{}".format(
+                    tweeter, contribution.amount, campaign.hashtag
+                )
             else:
                 message = "Uh-oh! There was a problem with your contribution. " \
                           "Please make sure your payment info is correct."
