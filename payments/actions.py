@@ -10,7 +10,7 @@ def link_user_braintree(user_profile, payment_method_nonce):
         user_profile.braintree_customer_id = result.customer.id
         user_profile.save()
     else:
-        raise result.errors
+        raise ValueError(result.errors)
     return result.is_success
 
 

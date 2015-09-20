@@ -23,7 +23,9 @@ a {
     font-family: 'Roboto';
     text-align: center;
     .btn-social {
+        margin-left: 1.5em;
         padding-left: 3em;
+        line-height: 2em;
         width: inherit;
         -webkit-border-radius: 10px;
                 border-radius: 10px;
@@ -31,7 +33,7 @@ a {
     }
     .btn-social>:first-child {
         width: 1.5em;
-        line-height: 1em;
+        line-height: 1.2em;
     }
     .fa {
         width: 1.5em;

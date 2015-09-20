@@ -18,13 +18,14 @@ def register(request):
         raise ValueError("Must register with valid user")
     payment_method_nonce = request.POST['payment_method_nonce']
     link_user_braintree(user_profile, payment_method_nonce)
-    campaign_id = int(request.POST['campaign_id'])
-    campaign = Campaign.objects.get(id=campaign_id)
+    campaign_id = request.POST.get('campaign_id', '')
+    if len(campaign_id) != 0:
+        campaign = Campaign.objects.get(id=int(campaign_id))
 
-    OAUTH_TOKEN = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token']
-    OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token_secret']
-    twitter = Twython(settings.SOCIAL_AUTH_TWITTER_KEY, settings.SOCIAL_AUTH_TWITTER_SECRET, OAUTH_TOKEN,
-                      OAUTH_SECRET)
+        OAUTH_TOKEN = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token']
+        OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token_secret']
+        twitter = Twython(settings.SOCIAL_AUTH_TWITTER_KEY, settings.SOCIAL_AUTH_TWITTER_SECRET, OAUTH_TOKEN,
+                          OAUTH_SECRET)
 
-    charge_user(campaign, request.user, twitter)
+        charge_user(campaign, request.user, twitter)
     return redirect('https://twitter.com/IWillContribute')

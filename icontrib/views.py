@@ -30,7 +30,7 @@ def create_campaign(request):
     target_amount = Decimal(strip_spec_chars(request.POST['targetAmount']))
     contribution_amount = Decimal(strip_spec_chars(request.POST['contributionAmount']))
     campaign = Campaign.objects.create(
-        hashtag=hashtag,
+        hashtag=hashtag.lower(),
         target_amount=str(target_amount),
         contribution_amount=str(contribution_amount),
         organizer_profile_id=request.user.userprofile.id
