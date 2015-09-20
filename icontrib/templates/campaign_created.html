@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 
 {% block main %}
+<script type="text/javascript">
+   $(document).ready(function() {
+        $('#fullpage-done').fullpage({
+            sectionsColor: ['#7BAABE']
+        })
+  })
+</script>
     <div id="signup">
         <form>
-            <div id="fullpage">
+            <div id="fullpage-done">
                 <div class="row section section-4" data-anchor="section4">
                     <div class="container">
                         <h1>You're done!</h1>

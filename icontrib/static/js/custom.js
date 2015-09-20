@@ -1,10 +1,9 @@
 $(document).ready(function() {
   $('#fullpage').fullpage({
 		// anchors: ['hello', 'hashtag', 'goal', 'payment', 'done']
-		anchors: ['step-hello','step-campaign','step-goal'],
-		sectionsColor: ['whitesmoke', '#1bbc9b', '#4BBFC3'],
+		anchors: ['step-hello','step-campaign','step-goal', 'step-email'],
+		sectionsColor: ['whitesmoke', '#1bbc9b', '#4BBFC3','cornflowerblue'],
 		scrollingSpeed : 500,
-		menu : '#menu'
 	});
 	var hashtag = document.getElementById('campaignField');
   if (hashtag) {

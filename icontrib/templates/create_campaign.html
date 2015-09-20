@@ -22,10 +22,10 @@
                 {% if request.user and not request.user.is_anonymous %}
                     <div class="row section section-2" data-anchor="section2">
                         <div class="container">
-                            <label for="hashtagfield">Hey, {{ request.user.get_full_name|default:"User" }}.<br/>Pick a
+                            <label for="campaignField">Hey, {{ request.user.get_full_name|default:"User" }}.<br/>Pick a
                                 campaign hashtag!</label>
                             <input class="u-full-width" type="text" placeholder="ex: #campaignforpizza" name="hashtag"
-                                   id="hashtagfield">
+                                   id="campaignField">
                         </div>
                     </div>
                     <div class="row section section-3" data-anchor="section3">
@@ -41,8 +41,7 @@
                     <div class="row section section-3" data-anchor="section3">
                         <div class="container">
                             <label for="emailField">Email address</label>
-                            <input class="u-full-width" type="email" placeholder="test@gmail.com" name="email"
-                                   style="color: gray;"
+                            <input class="u-full-width" type="text" placeholder="ex: youremail@gmail.com" name="email"
                                    id="emailField">
                             <p>We will send you an email with details on how to receive payout for your campaign.</p>
                             <input class="u-full-width" type="submit" value="Create">
