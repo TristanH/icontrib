@@ -4,6 +4,9 @@ from django.conf import settings
 import django
 django.setup()
 
+import json
+import requests
+
 from social.apps.django_app.default.models import UserSocialAuth
 from twython import TwythonStreamer, Twython
 
@@ -48,16 +51,18 @@ class MyStreamer(TwythonStreamer):
                 tweeter, campaign.hashtag, campaign.id
             )
             twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
+            requests.post("https://hooks.slack.com/services/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", data=json.dumps({'text': "Told {} to sign up for icontrib #{} successfully!".format(tweeter, campaign.hashtag), }))
         else:
-            campaign = Campaign.objects.get(hashtag=campaign_hashtag)
 
             if campaign.organizer_profile == app_user[0].user.userprofile:
                 return  # We don't want a campaign organizer to donate to their own campaign by tweeting
 
-            charge_user(campaign, app_user[0].user, twitter, data['id_str'])
+            was_charged = charge_user(campaign, app_user[0].user, twitter, data['id_str'])
+            requests.post("https://hooks.slack.com/services/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", data=json.dumps({'text': "Ran charge_user for {} and #{}: charged: {} ".format(tweeter, campaign.hashtag, was_charged), }))
+
 
     def on_error(self, status_code, data):
-        print str(data)
+        requests.post("https://hooks.slack.com/services/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", data=json.dumps({'text': "Error on twitter streamer: {}".format(data), }))
 
 
 def stream_mentions():
@@ -67,6 +72,7 @@ def stream_mentions():
 
 while True:
     try:
+        requests.post("https://hooks.slack.com/services/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", data=json.dumps({'text': "Starting stream_mentions" }))
         stream_mentions()
     except Exception as e:
         pass
