@@ -11,12 +11,11 @@
     <div class="container" id="payment">
     <div class="row section section-1" data-anchor="pay">
         <h1>Enter your payment information to donate to #yoloswag</h1>
-        <h2>We'll also remember your credit card info, so next time you can contribute with one click!</h2>
+        <h2>We'll also remember your credit card info, so next time you can contribute with one click!</h1>
         <form id="checkout" action="{% url 'payments:register' %}" method="post">
             {% csrf_token %}
             <div id="payment-form"></div>
             <input type="submit" value="Sign Up">
-            <input type="hidden" name="campaign_id" value="{{ campaign_id }}">
         </form>
         <script>
             var clientToken = "{{ client_token }}";

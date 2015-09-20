@@ -1,17 +1,23 @@
 $(document).ready(function() {
-    $('#fullpage').fullpage({
+  $('#fullpage').fullpage({
 		// anchors: ['hello', 'hashtag', 'goal', 'payment', 'done']
 		anchors: ['step-hello','step-campaign','step-goal', 'step-payment'],
 		sectionsColor: ['whitesmoke', '#1bbc9b', '#4BBFC3', '#7BAABE'],
 		scrollingSpeed : 500,
 		menu : '#menu'
 	});
-	var hashtag = document.getElementById('hashtagfield');
-	hashtag.addEventListener('keyup', hashtagEventListener);
+	var hashtag = document.getElementById('campaignField');
+  if (hashtag) {
+    hashtag.addEventListener('keyup', hashtagEventListener);
+  }
 	var goalField = document.getElementById('goalAmountField');
-	goalField.addEventListener('keyup', goalEventListener);
+  if (goalField) {
+  	goalField.addEventListener('keyup', goalEventListener);
+  }
 	var contribField = document.getElementById('contribAmountField');
-	contribField.addEventListener('keyup', contribEventListener);
+  if (contribField) {
+    contribField.addEventListener('keyup', contribEventListener);
+  }
 });
 
 
@@ -81,3 +87,4 @@ function  contribEventListener() {
     new_value = '$'+new_value;
 	cost.value = new_value
 }
+

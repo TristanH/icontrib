@@ -25,4 +25,3 @@ def charge_user(campaign, user, twitter):
                   "Please make sure your payment info is correct.".format(tweeter)
         twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
         return False
-

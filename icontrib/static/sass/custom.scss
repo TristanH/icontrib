@@ -13,7 +13,7 @@
 }
 
 html {
-    background: #ADDDCF;
+    background: whitesmoke;
 }
 a {
     text-decoration: none;
@@ -136,6 +136,15 @@ a {
   margin-top: 5px;
 }
 
+h1#title {
+    font-size: 2em;
+    font-family: Pacifico;
+    position: fixed;
+    left: 20px;
+    top: 0;
+    z-index: 50;
+}
+
 #signup {
     .twitter-bubble {
         position: relative;
@@ -166,5 +175,17 @@ a {
         margin-left: -20px;
         top: -15px;
         left: 50%;
+    }
+}
+
+#payment {
+    // margin-top: 20%;
+   font-family: 'Roboto';
+    h1 {
+       font-size: 3.5em;
+    }
+
+    h2 {
+       font-size: 1.8em;
     }
 }

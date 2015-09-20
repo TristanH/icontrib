@@ -34,26 +34,28 @@ class MyStreamer(TwythonStreamer):
 
         campaign_matches = []
         for hashtag_obj in hashtags:
-            if Campaign.objects.filter(hashtag=hashtag_obj['text']).exists():
-                campaign_matches.append(hashtag_obj['text'])
+            campaigns = Campaign.objects.filter(hashtag=hashtag_obj['text'])
+            if campaigns.exists():
+                campaign_matches.append(campaigns[0])
 
         if len(campaign_matches) != 1:
             # TODO: tweet here to let user know they mentioned multiple campaigns
             return
-        campaign_hashtag = campaign_matches[0]
+        campaign = campaign_matches[0]
 
         app_user = UserSocialAuth.objects.filter(uid=data['user']['id_str'])
         if not app_user.exists() or not app_user[0].user.userprofile.payment_verified:
             message = "@{0} Hey! You haven't signed up for iContrib yet. " \
                       "Make your contribution for #{1} here: " \
-                      "icontrib.co/start".format(
-                tweeter, campaign_hashtag
+                      "icontrib.co/?c={2}".format(
+                tweeter, campaign.hashtag, campaign.id
             )
             twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
         else:
             campaign = Campaign.objects.get(hashtag=campaign_hashtag)
+
             if campaign.organizer_profile == app_user[0].user.userprofile:
-                return  # We don't want a campaign organizer to donate to their own campaign
+                return  # We don't want a campaign organizer to donate to their own campaign by tweeting
 
             charge_user(campaign, app_user[0].user, twitter)
 

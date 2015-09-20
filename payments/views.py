@@ -1,4 +1,5 @@
 from django.shortcuts import HttpResponse, redirect
+from icontrib.models import Campaign
 from payments.actions import generate_client_token, link_user_braintree
 
 
@@ -13,4 +14,7 @@ def register(request):
         raise ValueError("Must register with valid user")
     payment_method_nonce = request.POST['payment_method_nonce']
     link_user_braintree(user_profile, payment_method_nonce)
+    campaign_id = request.POST['campaign_id']
+    campaign = Campaign.objects.get(id=campaign_id)
+    # TODO: redirect to campaign
     return redirect('https://twitter.com/IWillContribute')
