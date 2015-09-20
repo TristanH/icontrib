@@ -5,8 +5,7 @@ urlpatterns = patterns('',
     url(r'^$', 'icontrib.views.create_campaign', name='home'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^logout/$', 'icontrib.views.logout', name='logout'),
-    url(r'^setup_payment', 'icontrib.views.cc_form', name='setup_payment'),
-    url(r'^done/$', 'icontrib.views.done'),
+    url(r'^setup_payment/?$', 'icontrib.views.cc_form', name='setup_payment'),
 
     url(r'^view_campaign/(\w+)$', 'icontrib.views.view_campaign', name='view_campaign'),
 

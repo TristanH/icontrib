@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div id="signup">
+        <form>
+            <div id="fullpage">
+                <div class="row section section-4" data-anchor="section4">
+                    <div class="container">
+                        <h1>You're done!</h1>
+
+                        <h2>Share your campaign with the world!</h2>
+
+                        <div class="container">
+                            <a href="https://twitter.com/intent/tweet?text={{ tweet_text|urlencode }}"
+                               class="twitter-hashtag-button" data-size="large">Tweet #TwitterStories</a>
+                            <script>!function (d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+                                if (!d.getElementById(id)) {
+                                    js = d.createElement(s);
+                                    js.id = id;
+                                    js.src = p + '://platform.twitter.com/widgets.js';
+                                    fjs.parentNode.insertBefore(js, fjs);
+                                }
+                            }(document, 'script', 'twitter-wjs');</script>
+                            <div class="twitter-bubble">
+                                <p> {{ tweet_text }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+{% endblock %}

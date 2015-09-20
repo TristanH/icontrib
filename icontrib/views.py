@@ -1,9 +1,17 @@
-from unicodedata import decimal
 from decimal import Decimal
+from django.core.urlresolvers import reverse
+
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout as auth_logout
 from icontrib.models import Campaign
 from payments.actions import generate_client_token
+
+
+def strip_spec_chars(s):
+    assert len(s) != 0
+    if s[0] in ('#', '$'):
+        return s[1:]
+    return s
 
 
 def logout(request):
@@ -15,18 +23,20 @@ def create_campaign(request):
     if request.method == 'GET':
         return render(request, 'create_campaign.html')
 
-    hashtag = request.POST['hashtag']
-    if hashtag.startswith('#'):
-        hashtag = hashtag[1:]
-    target_amount = Decimal(request.POST['targetAmount'])
-    contribution_amount = Decimal(request.POST['contributionAmount'])
+    hashtag = strip_spec_chars(request.POST['hashtag'])
+    if Campaign.objects.filter(hashtag=hashtag).exists():
+        return redirect("{}#step-campaign".format(reverse('home')))
+    target_amount = Decimal(strip_spec_chars(request.POST['targetAmount']))
+    contribution_amount = Decimal(strip_spec_chars(request.POST['contributionAmount']))
     campaign = Campaign.objects.create(
         hashtag=hashtag,
         target_amount=str(target_amount),
         contribution_amount=str(contribution_amount),
         organizer_profile_id=request.user.userprofile.id
     )
-    return redirect('view_campaign', campaign.hashtag)
+    tweet_text = "I just created a campaign: #{}, help contribute it by tagging @IWillContribute" \
+        .format(campaign.hashtag)
+    return done(request, hashtag, tweet_text)
 
 
 def cc_form(request):
@@ -36,8 +46,11 @@ def cc_form(request):
     return render(request, 'cc_form.html', context=context)
 
 
-def done(request):
-    return render(request, 'done.html')
+def done(request, hashtag, tweet_text):
+    return render(request, 'campaign_complete.html', context=dict(
+        hashtag=hashtag,
+        tweet_text=tweet_text
+    ))
 
 
 def view_campaign(request, campaign_hashtag):
