@@ -1,11 +1,152 @@
+@font-face {
+    font-family: 'Pacifico';
+    src: url('Pacifico.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    background: #ADDDCF;
+}
+a {
+    text-decoration: none;
+}
 #signup {
-	h1 {
-		text-align: center;
-	}
-	label {
-		text-align: center;
-	}
-	input .submit {
-		
-	}
+    font-size: 3.2em;
+    font-family: 'Roboto';
+    text-align: center;
+    .btn-social {
+        padding-left: 3em;
+        width: inherit;
+        -webkit-border-radius: 10px;
+                border-radius: 10px;
+    }
+    .btn-social>:first-child {
+        width: 1.5em;
+        line-height: 1em;
+    }
+    .fa {
+        width: 1.5em;
+    }
+    h1 {
+        font-family: Pacifico;
+    }
+
+    label {
+        text-align: center;
+    }
+
+    input {
+        text-align: center;
+        color: white;
+        background: none;
+        border: 0;
+    }
+
+    input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color:    #fff;
+        opacity: 0.5;
+    }
+    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color:    #fff ;
+        opacity: 0.5;
+    }
+    input::-moz-placeholder { /* Mozilla Firefox 19+ */
+       color:    #fff;
+       opacity:  1;
+    }
+    input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color:    #fff;
+    }
+}
+
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 70;
+    font-family: 'Roboto';
+
+    li {
+        float: left;
+        display:inline-block;
+        margin: 10px;
+        color: #000;
+        background:#fff;
+        background: rgba(255,255,255, 0.5);
+        -webkit-border-radius: 10px;
+                border-radius: 10px;
+    }
+
+    li.active{
+        background:#666;
+        background: rgba(0,0,0, 0.5);
+        color: #fff;
+    }
+    li a{
+        text-decoration:none;
+        color: #000;
+    }
+    li.active a:hover{
+        color: #000;
+    }
+    li:hover{
+        background: rgba(255,255,255, 0.8);
+    }
+    li a,
+    li.active a{
+        padding: 9px 18px;
+        display:block;
+    }
+    li.active a{
+        color: #fff;
+    }
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+.btn-block + .btn-block {
+  margin-top: 5px;
+}
+
+#signup {
+    .twitter-bubble {
+        position: relative;
+        height: auto;
+        padding: 0px;
+        background: #FFFFFF;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        padding: 0.3em;
+    }
+
+    .twitter-bubble>:first-child {
+        color: #000;
+        font-size: 0.8em;
+        width: 100%;
+    }
+
+    .twitter-bubble:after {
+        content: '';
+        position: absolute;
+        border-style: solid;
+        border-width: 0 20px 15px;
+        border-color: #FFFFFF transparent;
+        display: block;
+        width: 0;
+        z-index: 1;
+        margin-left: -20px;
+        top: -15px;
+        left: 50%;
+    }
 }
