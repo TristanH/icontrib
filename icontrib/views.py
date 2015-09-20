@@ -6,10 +6,6 @@ from icontrib.models import Campaign
 from payments.actions import generate_client_token
 
 
-def home(request):
-    return render(request, 'signup_form.html')
-
-
 def logout(request):
     auth_logout(request)
     return redirect('home')
