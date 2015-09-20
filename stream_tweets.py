@@ -40,7 +40,7 @@ class MyStreamer(TwythonStreamer):
         #     return
 
         campaign_hashtag = "swagyolo"  # campaign_matches[0]
-        app_user = UserSocialAuth.objects.filter(uid=data['id_str'])
+        app_user = UserSocialAuth.objects.filter(uid=data.get['user']['id_str'])
         message = "ayy lmao"
         contribution = None
         if not app_user.exists() or not app_user.user.userprofile.payment_verified:
