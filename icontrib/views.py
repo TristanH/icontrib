@@ -1,5 +1,4 @@
 from decimal import Decimal
-from django.core.urlresolvers import reverse
 
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout as auth_logout
@@ -48,19 +47,11 @@ def cc_form(request):
     context = {
         'client_token': generate_client_token()
     }
-    return render(request, 'cc_form.html', context=context)
+    return render(request, 'setup_payment.html', context=context)
 
 
 def done(request, hashtag, tweet_text):
-    return render(request, 'campaign_complete.html', context=dict(
+    return render(request, 'campaign_created.html', context=dict(
         hashtag=hashtag,
         tweet_text=tweet_text
     ))
-
-
-def view_campaign(request, campaign_hashtag):
-    campaign = Campaign.objects.get(hashtag=campaign_hashtag)
-    context = dict(
-        campaign=campaign
-    )
-    return render(request, 'campaign.html', context=context)

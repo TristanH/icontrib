@@ -1,13 +1,6 @@
 {% extends 'base.html' %}
 
 {% block main %}
-    <ul id="menu">
-        {% if request.user and not request.user.is_anonymous %}
-            <li data-menuanchor="section1" class="active"><a href="#step-hello">Sign In</a></li>
-            <li data-menuanchor="section2"><a href="#step-campaign">Campaign</a></li>
-            <li data-menuanchor="section3"><a href="#step-goal">Goal</a></li>
-        {% endif %}
-    </ul>
     <div id="signup">
         <form action="{% url 'home' %}" method="post">
             {% csrf_token %}
