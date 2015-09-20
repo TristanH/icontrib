@@ -47,7 +47,7 @@ class MyStreamer(TwythonStreamer):
         if not app_user.exists() or not app_user[0].user.userprofile.payment_verified:
             message = "@{0} Hey! You haven't signed up for iContrib yet. " \
                       "Make your contribution for #{1} here: " \
-                      "icontrib.co/?c={2}".format(
+                      "www.icontrib.co/?c={2}".format(
                 tweeter, campaign.hashtag, campaign.id
             )
             twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
