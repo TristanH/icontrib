@@ -32,25 +32,26 @@ a {
   width: inherit;
   -webkit-border-radius: 10px;
   border-radius: 10px;
+  text-align: center;
 }
-/* line 31, ../sass/custom.scss */
+/* line 32, ../sass/custom.scss */
 #signup .btn-social > :first-child {
   width: 1.5em;
   line-height: 1em;
 }
-/* line 35, ../sass/custom.scss */
+/* line 36, ../sass/custom.scss */
 #signup .fa {
   width: 1.5em;
 }
-/* line 38, ../sass/custom.scss */
+/* line 39, ../sass/custom.scss */
 #signup h1 {
   font-family: Pacifico;
 }
-/* line 42, ../sass/custom.scss */
+/* line 43, ../sass/custom.scss */
 #signup label {
   text-align: center;
 }
-/* line 46, ../sass/custom.scss */
+/* line 47, ../sass/custom.scss */
 #signup input {
   text-align: center;
   color: white;
@@ -58,50 +59,55 @@ a {
   border: 0;
   height: 1.5em;
 }
-/* line 54, ../sass/custom.scss */
+/* line 55, ../sass/custom.scss */
 #signup input[type=text] {
   box-shadow: -8px 10px 0px -7px #ebebeb, 8px 10px 0px -7px #ebebeb;
   -webkit-transition: box-shadow 0.3s;
   transition: box-shadow 0.3s;
 }
-/* line 60, ../sass/custom.scss */
+/* line 61, ../sass/custom.scss */
 #signup input[type=text]:focus {
   outline: none;
   box-shadow: -8px 10px 0px -7px #4EA6EA, 8px 10px 0px -7px #4EA6EA;
 }
-/* line 65, ../sass/custom.scss */
+/* line 66, ../sass/custom.scss */
 #signup input::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
   color: #fff;
   opacity: 0.5;
 }
-/* line 69, ../sass/custom.scss */
+/* line 70, ../sass/custom.scss */
 #signup input:-moz-placeholder {
   /* Mozilla Firefox 4 to 18 */
   color: #fff;
   opacity: 0.5;
 }
-/* line 73, ../sass/custom.scss */
+/* line 74, ../sass/custom.scss */
 #signup input::-moz-placeholder {
   /* Mozilla Firefox 19+ */
   color: #fff;
   opacity: 1;
 }
-/* line 77, ../sass/custom.scss */
+/* line 78, ../sass/custom.scss */
 #signup input:-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: #fff;
 }
-
 /* line 82, ../sass/custom.scss */
+#signup .hide-section {
+  display: none;
+}
+
+/* line 87, ../sass/custom.scss */
 #menu {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 70;
   font-family: 'Roboto';
+  visibility: hidden;
 }
-/* line 89, ../sass/custom.scss */
+/* line 95, ../sass/custom.scss */
 #menu li {
   float: left;
   display: inline-block;
@@ -112,48 +118,48 @@ a {
   -webkit-border-radius: 10px;
   border-radius: 10px;
 }
-/* line 100, ../sass/custom.scss */
+/* line 106, ../sass/custom.scss */
 #menu li.active {
   background: #666;
   background: rgba(0, 0, 0, 0.5);
   color: #fff;
 }
-/* line 105, ../sass/custom.scss */
+/* line 111, ../sass/custom.scss */
 #menu li a {
   text-decoration: none;
   color: #000;
 }
-/* line 109, ../sass/custom.scss */
+/* line 115, ../sass/custom.scss */
 #menu li.active a:hover {
   color: #000;
 }
-/* line 112, ../sass/custom.scss */
+/* line 118, ../sass/custom.scss */
 #menu li:hover {
   background: rgba(255, 255, 255, 0.8);
 }
-/* line 115, ../sass/custom.scss */
+/* line 121, ../sass/custom.scss */
 #menu li a,
 #menu li.active a {
   padding: 9px 18px;
   display: block;
 }
-/* line 120, ../sass/custom.scss */
+/* line 126, ../sass/custom.scss */
 #menu li.active a {
   color: #fff;
 }
 
-/* line 125, ../sass/custom.scss */
+/* line 131, ../sass/custom.scss */
 .btn-block {
   display: block;
   width: 100%;
 }
 
-/* line 129, ../sass/custom.scss */
+/* line 135, ../sass/custom.scss */
 .btn-block + .btn-block {
   margin-top: 5px;
 }
 
-/* line 134, ../sass/custom.scss */
+/* line 140, ../sass/custom.scss */
 #signup .twitter-bubble {
   position: relative;
   height: auto;
@@ -164,13 +170,13 @@ a {
   border-radius: 10px;
   padding: 0.3em;
 }
-/* line 145, ../sass/custom.scss */
+/* line 151, ../sass/custom.scss */
 #signup .twitter-bubble > :first-child {
   color: #000;
   font-size: 0.8em;
   width: 100%;
 }
-/* line 151, ../sass/custom.scss */
+/* line 157, ../sass/custom.scss */
 #signup .twitter-bubble:after {
   content: '';
   position: absolute;

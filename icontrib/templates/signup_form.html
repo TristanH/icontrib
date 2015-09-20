@@ -16,7 +16,7 @@
     {% endif %}
     <form>
       <div id="fullpage">
-        <div class="row section section-1 {% if not request.user or request.user.is_anonymous %} hide-section {% endif %}" data-anchor="section1">
+        <div class="row section section-1 {% if not request.user or not request.user.is_anonymous %} hide-section {% endif %}" data-anchor="section1">
           <div class="container">
             <h1 >Hey! Get your campaign up in 60 seconds!</h1>
             <a class="btn btn-block btn-social btn-twitter" href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">

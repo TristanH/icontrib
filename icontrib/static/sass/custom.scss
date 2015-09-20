@@ -27,6 +27,7 @@ a {
         width: inherit;
         -webkit-border-radius: 10px;
                 border-radius: 10px;
+        text-align: center;
     }
     .btn-social>:first-child {
         width: 1.5em;
@@ -77,6 +78,10 @@ a {
     input:-ms-input-placeholder { /* Internet Explorer 10-11 */
        color:    #fff;
     }
+
+    .hide-section {
+        display: none;
+    }
 }
 
 #menu {
@@ -85,6 +90,7 @@ a {
     left: 0;
     z-index: 70;
     font-family: 'Roboto';
+    visibility: hidden;
 
     li {
         float: left;
