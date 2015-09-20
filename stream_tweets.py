@@ -19,7 +19,6 @@ OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_t
 
 class MyStreamer(TwythonStreamer):
     def on_success(self, data):
-        import pdb; pdb.set_trace()
         tweeter = data.get('user', {}).get('screen_name')
         if not tweeter:
             tweeter = data.get('source', {}).get('screen_name')
