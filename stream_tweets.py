@@ -42,14 +42,13 @@ class MyStreamer(TwythonStreamer):
         campaign_hashtag = campaign_matches[0]
 
         app_user = UserSocialAuth.objects.filter(uid=data['user']['id_str'])
-        message = "ayy lmao"
-        contribution = None
         if not app_user.exists() or not app_user[0].user.userprofile.payment_verified:
             message = "@{0} Hey! You haven't signed up for iContrib yet. " \
                       "Make your contribution for #{1} here: " \
                       "icontrib.co/start".format(
                 tweeter, campaign_hashtag
             )
+            twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
         else:
             campaign = Campaign.objects.get(hashtag=campaign_hashtag)
 
@@ -68,8 +67,8 @@ class MyStreamer(TwythonStreamer):
                 message = "Uh-oh! There was a problem with your contribution. " \
                           "Please make sure your payment info is correct."
             contribution.save()
+            twitter.update_status(status=message)
 
-        result = twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
 
     def on_error(self, status_code, data):
         print str(data)
