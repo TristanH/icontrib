@@ -66,7 +66,7 @@ $( ".target" ).change(function() {
 // });
 
 function  hashtagEventListener() {
-	var hashtag = document.getElementById('hashtagfield');
+	var hashtag = document.getElementById('campaignField');
     new_value = hashtag.value.replace(/[^\w\s]/gi, '');
     new_value = '#'+new_value;
 	hashtag.value = new_value
