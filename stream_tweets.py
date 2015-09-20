@@ -15,12 +15,10 @@ from twython import TwythonStreamer, Twython
 
 OAUTH_TOKEN = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token']
 OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token_secret']
-   
+
 
 class MyStreamer(TwythonStreamer):
     def on_success(self, data):
-        import pdb; pdb.set_trace()
-
         tweeter = data.get('user', {}).get('screen_name')
         if not tweeter:
             tweeter = data.get('source', {}).get('screen_name')
@@ -54,6 +52,9 @@ class MyStreamer(TwythonStreamer):
         else:
             campaign = Campaign.objects.get(hashtag=campaign_hashtag)
 
+            if campaign.organizer_profile == app_user[0].user.userprofile:
+                return  # We don't want a campaign organizer to donate to their own campaign
+
             contribution = Contribution()
             contribution.amount = campaign.contribution_amount  # TODO: un-hardcode contrib amt
             contribution.profile = app_user[0].user.userprofile
@@ -62,19 +63,20 @@ class MyStreamer(TwythonStreamer):
             contribution.campaign = campaign
             if contribution.confirmed:
                 # contribution was successful
-                message = "@{} Congrats! You contributed ${} to #{}, we've now raised ${} out of ${}!".format(
+                message = "Congrats @{}! You contributed ${} to #{}, we've now raised ${} out of ${}!".format(
                     tweeter, contribution.amount, campaign.hashtag, campaign.amount_raised, campaign.target_amount
                 )
+                twitter.update_status(status=message)
             else:
-                message = "Uh-oh! There was a problem with your contribution. " \
-                          "Please make sure your payment info is correct."
+                message = "@{} Uh-oh! There was a problem with your contribution. " \
+                          "Please make sure your payment info is correct.".format(tweeter)
+                twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
+
             contribution.save()
-            twitter.update_status(status=message)
 
 
     def on_error(self, status_code, data):
-        print status_code
-        import pdb; pdb.set_trace()
+        print str(data)
 
         # Want to stop trying to get data because of the error?
         # Uncomment the next line!

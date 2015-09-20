@@ -3,6 +3,7 @@ from django.core.urlresolvers import reverse
 
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout as auth_logout
+from django.core.urlresolvers import reverse
 from icontrib.models import Campaign
 from payments.actions import generate_client_token
 
@@ -37,6 +38,10 @@ def create_campaign(request):
     tweet_text = "I just created a campaign: #{}, help contribute it by tagging @IWillContribute" \
         .format(campaign.hashtag)
     return done(request, hashtag, tweet_text)
+
+
+def start(request):
+    return redirect("{}?next=/setup_payment/".format(reverse('social:begin', args=['twitter'])))
 
 
 def cc_form(request):

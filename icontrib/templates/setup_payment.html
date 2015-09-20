@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <div id="fullpage">
+        <form id="checkout" action="{% url 'payments:register' %}" method="post">
+            {% csrf_token %}
+            <div id="payment-form"></div>
+            <input type="submit" value="Sign Up">
+        </form>
+        <script>
+            var clientToken = "{{ client_token }}";
+
+            braintree.setup(clientToken, "dropin", {
+                container: "payment-form"
+            });
+        </script>
+    </div>
+{% endblock %}
