@@ -7,7 +7,7 @@ from payments.actions import generate_client_token
 
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'signup_form.html')
 
 
 def logout(request):
