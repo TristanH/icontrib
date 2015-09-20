@@ -47,9 +47,9 @@ class MyStreamer(TwythonStreamer):
         message = "ayy lmao"
         contribution = None
         if not app_user.exists() or not app_user[0].user.userprofile.payment_verified:
-            message = "Hey @{0}! You haven't signed up for iContrib yet. " \
+            message = "@{0} Hey! You haven't signed up for iContrib yet. " \
                       "Make your contribution for #{1} here: " \
-                      "http://icontrib.co/signup".format(
+                      "icontrib.co/start".format(
                 tweeter, campaign_hashtag
             )
         else:
@@ -71,10 +71,7 @@ class MyStreamer(TwythonStreamer):
                           "Please make sure your payment info is correct."
             contribution.save()
 
-        if 'retweeted_status' in data:
-            result = twitter.update_status(status=message)
-        else:
-            result = twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
+        result = twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
 
     def on_error(self, status_code, data):
         print status_code
