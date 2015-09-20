@@ -59,6 +59,7 @@ class MyStreamer(TwythonStreamer):
             contribution.amount = campaign.contribution_amount  # TODO: un-hardcode contrib amt
             contribution.profile = app_user[0].user.userprofile
             contribution.confirmed = execute_contribution(contribution.profile, contribution.amount)
+            contribution.twitter_post_id = data['id_str']
             if contribution.confirmed:
                 # contribution was successful
                 message = "Congrats! You contributed ${0} to #{1}".format(contribution.amount, campaign.hashtag)
@@ -71,10 +72,6 @@ class MyStreamer(TwythonStreamer):
             result = twitter.update_status(status=message)
         else:
             result = twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
-
-        if contribution is not None:
-            contribution.twitter_post_link = result.get('url')
-            contribution.save()
 
     def on_error(self, status_code, data):
         print status_code
