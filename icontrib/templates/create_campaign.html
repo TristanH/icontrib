@@ -2,7 +2,7 @@
 
 {% block main %}
     <div id="signup">
-        <form action="{% url 'home' %}" method="post">
+        <form action="{% url 'campaign' %}" method="post">
             {% csrf_token %}
             <div id="fullpage">
                 <div class="row section section-1" data-anchor="section1">
@@ -12,7 +12,7 @@
                             <h4>Welcome, {{ request.user.first_name }}</h4>
                         {% else %}
                             <a class="btn btn-block btn-social btn-twitter"
-                               href="{% url 'social:begin' 'twitter' %}?next={% url 'home' %}{{ '#step-campaign' | urlencode }}">
+                               href="{% url 'social:begin' 'twitter' %}?next={% url 'campaign' %}{{ '#step-campaign' | urlencode }}">
                                 <i class="fa fa-twitter"></i>
                                 Connect with Twitter to get started
                             </a>

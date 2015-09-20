@@ -17,7 +17,7 @@ def strip_spec_chars(s):
 
 def logout(request):
     auth_logout(request)
-    return redirect('home')
+    return redirect('campaign')
 
 
 def create_campaign(request):
@@ -26,7 +26,7 @@ def create_campaign(request):
 
     hashtag = strip_spec_chars(request.POST['hashtag'])
     if Campaign.objects.filter(hashtag=hashtag).exists():
-        return redirect("{}#step-campaign".format(reverse('home')))
+        return redirect("{}#step-campaign".format(reverse('campaign')))
     target_amount = Decimal(strip_spec_chars(request.POST['targetAmount']))
     contribution_amount = Decimal(strip_spec_chars(request.POST['contributionAmount']))
     campaign = Campaign.objects.create(
@@ -35,7 +35,10 @@ def create_campaign(request):
         contribution_amount=str(contribution_amount),
         organizer_profile_id=request.user.userprofile.id
     )
-    tweet_text = "I just created a campaign: #{} Contribute ${} to it by retweeting or tagging @IWillContribute".format(campaign.hashtag)
+    tweet_text = "I just created a campaign: #{}. Contribute ${} to it by retweeting or tagging @IWillContribute".format(
+        campaign.hashtag,
+        campaign.contribution_amount,
+    )
     return campaign_created(request, hashtag, tweet_text)
 
 
