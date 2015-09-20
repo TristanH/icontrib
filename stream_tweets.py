@@ -35,15 +35,14 @@ class MyStreamer(TwythonStreamer):
             if Campaign.objects.filter(hashtag=hashtag_obj['text']).exists():
                 campaign_matches.append(hashtag_obj['text'])
 
-        # if len(campaign_matches) != 1:
-        #     # TODO: tweet here to let user know they mentioned multiple campaigns
-        #     return
+        if len(campaign_matches) != 1:
+            # TODO: tweet here to let user know they mentioned multiple campaigns
+            return
 
-        campaign_hashtag = "swagyolo"  # campaign_matches[0]
         app_user = UserSocialAuth.objects.filter(uid=data['user']['id_str'])
         message = "ayy lmao"
         contribution = None
-        if not app_user.exists() or not app_user.user.userprofile.payment_verified:
+        if not app_user.exists() or not app_user[0].user.userprofile.payment_verified:
             message = "Hey @{0}! You haven't signed up for iContrib yet. " \
                       "Make your contribution for #{1} here: " \
                       "http://icontrib.co/signup".format(
@@ -54,7 +53,7 @@ class MyStreamer(TwythonStreamer):
 
             contribution = Contribution()
             contribution.amount = campaign.contribution_amount  # TODO: un-hardcode contrib amt
-            contribution.profile = app_user.user.userprofile
+            contribution.profile = app_user[0].user.userprofile
             contribution.confirmed, errors = execute_contribution(contribution.profile, contribution.amount)
             if contribution.confirmed:
                 # contribution was successful
