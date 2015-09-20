@@ -2,6 +2,7 @@ from unicodedata import decimal
 from decimal import Decimal
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout as auth_logout
+from django.core.urlresolvers import reverse
 from icontrib.models import Campaign
 from payments.actions import generate_client_token
 
@@ -31,6 +32,10 @@ def create_campaign(request):
         organizer_profile_id=request.user.userprofile.id
     )
     return redirect('view_campaign', campaign.hashtag)
+
+
+def start(request):
+    return redirect("{}?next=/setup_payment/".format(reverse('social:begin', args=['twitter'])))
 
 
 def cc_form(request):
