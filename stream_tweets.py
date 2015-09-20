@@ -5,6 +5,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'icontrib.settings')
 
 from django.conf import settings
 
+import django
+django.setup()
+
 from icontrib.models import Campaign, Contribution
 
 from social.apps.django_app.default.models import UserSocialAuth
@@ -38,6 +41,7 @@ class MyStreamer(TwythonStreamer):
         if len(campaign_matches) != 1:
             # TODO: tweet here to let user know they mentioned multiple campaigns
             return
+        campaign_hashtag = campaign_matches[0]
 
         app_user = UserSocialAuth.objects.filter(uid=data['user']['id_str'])
         message = "ayy lmao"
