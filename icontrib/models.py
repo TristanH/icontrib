@@ -33,7 +33,7 @@ class Contribution(models.Model):
 
     profile = models.ForeignKey('UserProfile')
 
-    twitter_post_id = models.CharField(max_length=256, null=False)
+    twitter_post_id = models.CharField(max_length=256, null=True)
 
     confirmed = models.BooleanField(null=False, default=False)
 

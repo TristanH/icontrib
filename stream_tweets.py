@@ -9,7 +9,6 @@ from twython import TwythonStreamer, Twython
 
 from icontrib.models import Campaign, Contribution
 from icontrib.utils import charge_user
-from payments.actions import execute_contribution
 
 OAUTH_TOKEN = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token']
 OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token_secret']
@@ -54,7 +53,7 @@ class MyStreamer(TwythonStreamer):
             if campaign.organizer_profile == app_user[0].user.userprofile:
                 return  # We don't want a campaign organizer to donate to their own campaign by tweeting
 
-            charge_user(campaign, app_user[0].user, twitter)
+            charge_user(campaign, app_user[0].user, twitter, data['id_str'])
 
     def on_error(self, status_code, data):
         print str(data)

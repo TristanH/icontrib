@@ -1,12 +1,14 @@
 from social.apps.django_app.default.models import UserSocialAuth
+from icontrib.models import Contribution
+from payments.actions import execute_contribution
 
 
-def charge_user(campaign, user, twitter):
+def charge_user(campaign, user, twitter, post_id=None):
     contribution = Contribution()
     contribution.amount = campaign.contribution_amount  # TODO: un-hardcode contrib amt
     contribution.profile = user.userprofile
     contribution.confirmed = execute_contribution(contribution.profile, contribution.amount)
-    contribution.twitter_post_id = data['id_str']
+    contribution.twitter_post_id = post_id
     contribution.campaign = campaign
 
     tweeter = UserSocialAuth.objects.get(user=user).extra_data['access_token']['screen_name']
