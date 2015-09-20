@@ -27,6 +27,7 @@ DEBUG = True
 
 TEMPLATE_DEBUG = True
 
+PREPEND_WWW = True
 
 # Application definition
 
