@@ -6,12 +6,18 @@ $(document).ready(function() {
 		scrollingSpeed : 500,
 		menu : '#menu'
 	});
-	var hashtag = document.getElementById('hashtagfield');
-	hashtag.addEventListener('keyup', hashtagEventListener);
+	var hashtag = document.getElementById('campaignField');
+  if (hashtag) {
+    hashtag.addEventListener('keyup', hashtagEventListener);
+  }
 	var goalField = document.getElementById('goalAmountField');
-	goalField.addEventListener('keyup', goalEventListener);
+  if (goalField) {
+  	goalField.addEventListener('keyup', goalEventListener);
+  }
 	var contribField = document.getElementById('contribAmountField');
-	contribField.addEventListener('keyup', contribEventListener);
+  if (contribField) {
+    contribField.addEventListener('keyup', contribEventListener);
+  }
 });
 
 
