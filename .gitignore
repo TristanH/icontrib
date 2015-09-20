@@ -2,7 +2,6 @@ venv
 *.pyc
 staticfiles
 local_settings.py
-icontrib/static/css
 *.sass-cache
 .config
 node_modules/
