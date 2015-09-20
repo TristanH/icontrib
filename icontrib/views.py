@@ -3,6 +3,7 @@ from decimal import Decimal
 from django.shortcuts import redirect, render
 from django.contrib.auth import logout as auth_logout
 from django.core.urlresolvers import reverse
+from django.utils.http import urlquote
 from icontrib.models import Campaign
 from payments.actions import generate_client_token
 
@@ -40,12 +41,20 @@ def create_campaign(request):
 
 
 def start(request):
-    return redirect("{}?next=/setup_payment/".format(reverse('social:begin', args=['twitter'])))
+    campaign_id = request.GET.get('c', '')
+    next_url = "{}{}".format(
+        reverse('setup_payment'),
+        urlquote("?c=" + campaign_id),
+    )
+    social_url = reverse('social:begin', args=['twitter'])
+    return redirect("{}?next={}"
+        .format(social_url, next_url))
 
 
 def setup_payments(request):
     context = {
-        'client_token': generate_client_token()
+        'client_token': generate_client_token(),
+        'campaign_id': request.GET.get('c')
     }
     return render(request, 'setup_payment.html', context=context)
 
