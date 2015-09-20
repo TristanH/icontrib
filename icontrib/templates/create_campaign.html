@@ -24,19 +24,19 @@
                         <div class="container">
                             <label for="hashtagfield">Hey, {{ request.user.get_full_name|default:"User" }}.<br/>Pick a
                                 campaign hashtag!</label>
-                            <input class="u-full-width" type="field" placeholder="ex: #campaignforpizza" name="hashtag"
+                            <input class="u-full-width" type="text" placeholder="ex: #campaignforpizza" name="hashtag"
                                    id="hashtagfield">
                         </div>
                     </div>
                     <div class="row section section-3" data-anchor="section3">
                         <div class="container">
                             <label for="goalAmountField">What's your campaign goal?</label>
-                            <input class="u-full-width" type="field" placeholder="ex: $1000" name="targetAmount"
+                            <input class="u-full-width" type="text" placeholder="ex: $1000" name="targetAmount"
                                    id="goalAmountField">
                             <label for="contribAmountField">Set the default contribution</label>
-                            <input class="u-full-width" type="field" placeholder="ex: $5" name="contributionAmount"
+                            <input class="u-full-width" type="text" placeholder="ex: $5" name="contributionAmount"
                                    id="contribAmountField">
-                            <input class="u-full-width" style="height: 25px" type="submit" value="Create"
+                            <input class="u-full-width" type="submit" value="Create"
                                    id="contribAmountField">
                         </div>
                     </div>

@@ -58,8 +58,12 @@ def start(request):
 def setup_payments(request):
     context = {
         'client_token': generate_client_token(),
-        'campaign_id': request.GET.get('c')
     }
+    campaign_id = request.GET.get('c')
+    if campaign_id:
+        campaign = Campaign.objects.get(id=int(campaign_id))
+        context['campaign_id'] = campaign_id
+        context['campaign_hashtag'] = campaign.hashtag
     return render(request, 'setup_payment.html', context=context)
 
 

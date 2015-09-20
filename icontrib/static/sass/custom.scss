@@ -52,6 +52,13 @@ a {
         height: 1.5em;
     }
 
+    input[type=submit] {
+        font-size: 1em;
+        width: initial;
+        background-color: cadetblue;
+        margin-top: 1em;
+    }
+
     input[type=text] {
       box-shadow: -8px 10px 0px -7px #ebebeb, 8px 10px 0px -7px #ebebeb;
       -webkit-transition: box-shadow 0.3s;

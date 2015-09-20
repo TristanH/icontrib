@@ -10,7 +10,11 @@
 <div id="fullpage-pay">
     <div class="container" id="payment">
     <div class="row section section-1" data-anchor="pay">
-        <h1>Enter your payment information to donate to #yoloswag</h1>
+        <h1>Enter your payment information to fund
+            {% if campaign_hashtag %}
+                to #{{ campaign_hashtag }}
+            {% endif %}
+        </h1>
         <h2>We'll also remember your credit card info, so next time you can contribute with one click!</h2>
         <form id="checkout" action="{% url 'payments:register' %}" method="post">
             {% csrf_token %}
