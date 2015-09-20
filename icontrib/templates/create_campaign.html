@@ -8,9 +8,9 @@
                 <div class="row section section-1" data-anchor="section1">
                     <div class="container">
                         {% if request.user and not request.user.is_anonymous %}
-                            <h1>Welcome back {{ request.user.first_name }},<br/> let's set up your campaign</h1>
+                            <h1>Welcome back {{ request.user.first_name }},<br/> let's set up your campaign.</h1>
                         {% else %}
-                            <h1>Hey! Get your campaign up in 60 seconds!</h1>
+                            <h1>Hey, start funding your campaign in 60 seconds!</h1>
                             <a class="btn btn-block btn-social btn-twitter"
                                href="{% url 'social:begin' 'twitter' %}?next={% url 'campaign' %}{{ '#step-campaign' | urlencode }}">
                                 <i class="fa fa-twitter"></i>
