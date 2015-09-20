@@ -72,10 +72,6 @@ class MyStreamer(TwythonStreamer):
         else:
             result = twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
 
-        if contribution is not None:
-            contribution.twitter_post_link = result.get('url')
-            contribution.save()
-
     def on_error(self, status_code, data):
         print status_code
         import pdb; pdb.set_trace()
