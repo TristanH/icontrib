@@ -12,7 +12,7 @@
 }
 /* line 15, ../sass/custom.scss */
 html {
-  background: #ADDDCF;
+  background: whitesmoke;
 }
 
 /* line 18, ../sass/custom.scss */
@@ -159,7 +159,17 @@ a {
   margin-top: 5px;
 }
 
-/* line 140, ../sass/custom.scss */
+/* line 139, ../sass/custom.scss */
+h1#title {
+  font-size: 2em;
+  font-family: Pacifico;
+  position: fixed;
+  left: 20px;
+  top: 0;
+  z-index: 50;
+}
+
+/* line 149, ../sass/custom.scss */
 #signup .twitter-bubble {
   position: relative;
   height: auto;
@@ -170,13 +180,13 @@ a {
   border-radius: 10px;
   padding: 0.3em;
 }
-/* line 151, ../sass/custom.scss */
+/* line 160, ../sass/custom.scss */
 #signup .twitter-bubble > :first-child {
   color: #000;
   font-size: 0.8em;
   width: 100%;
 }
-/* line 157, ../sass/custom.scss */
+/* line 166, ../sass/custom.scss */
 #signup .twitter-bubble:after {
   content: '';
   position: absolute;
@@ -189,4 +199,17 @@ a {
   margin-left: -20px;
   top: -15px;
   left: 50%;
+}
+
+/* line 181, ../sass/custom.scss */
+#payment {
+  font-family: 'Roboto';
+}
+/* line 184, ../sass/custom.scss */
+#payment h1 {
+  font-size: 3.5em;
+}
+/* line 188, ../sass/custom.scss */
+#payment h2 {
+  font-size: 1.8em;
 }
