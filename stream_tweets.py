@@ -74,7 +74,6 @@ class MyStreamer(TwythonStreamer):
 
             contribution.save()
 
-
     def on_error(self, status_code, data):
         print str(data)
 

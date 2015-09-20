@@ -34,8 +34,7 @@ def create_campaign(request):
         contribution_amount=str(contribution_amount),
         organizer_profile_id=request.user.userprofile.id
     )
-    tweet_text = "I just created a campaign: #{}, help contribute it by tagging @IWillContribute" \
-        .format(campaign.hashtag)
+    tweet_text = "I just created a campaign: #{} Contribute ${} to it by retweeting or tagging @IWillContribute".format(campaign.hashtag)
     return done(request, hashtag, tweet_text)
 
 
