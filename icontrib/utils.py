@@ -25,5 +25,5 @@ def charge_user(campaign, user, twitter, post_id=None):
         contribution.save()
         message = "@{} Uh-oh! There was a problem with your contribution. " \
                   "Please make sure your payment info is correct.".format(tweeter)
-        twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
+        twitter.update_status(status=message, in_reply_to_status_id=post_id)
         return False

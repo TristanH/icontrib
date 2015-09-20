@@ -33,7 +33,8 @@ class MyStreamer(TwythonStreamer):
 
         campaign_matches = []
         for hashtag_obj in hashtags:
-            campaigns = Campaign.objects.filter(hashtag=hashtag_obj['text'])
+            hashtag_text = hashtag_obj['text'].lower()
+            campaigns = Campaign.objects.filter(hashtag=hashtag_text)
             if campaigns.exists():
                 campaign_matches.append(campaigns[0])
 
