@@ -63,11 +63,14 @@ class MyStreamer(TwythonStreamer):
                 message = "@{} Congrats! You contributed ${} to #{}, we've now raised ${} out of ${}!".format(
                     tweeter, contribution.amount, campaign.hashtag, campaign.amount_raised, campaign.target_amount
                 )
+                twitter.update_status(status=message)
             else:
-                message = "Uh-oh! There was a problem with your contribution. " \
-                          "Please make sure your payment info is correct."
+                message = "@{} Uh-oh! There was a problem with your contribution. " \
+                          "Please make sure your payment info is correct.".format(tweeter)
+                twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
+            
             contribution.save()
-            twitter.update_status(status=message)
+            
 
 
     def on_error(self, status_code, data):
