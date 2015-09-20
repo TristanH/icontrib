@@ -19,7 +19,7 @@ a {
     text-decoration: none;
 }
 #signup {
-    font-size: 3.2em;
+    font-size: 2.5em;
     font-family: 'Roboto';
     text-align: center;
     .btn-social {
@@ -48,6 +48,18 @@ a {
         color: white;
         background: none;
         border: 0;
+        height: 1.5em;
+    }
+
+    input[type=text] {
+      box-shadow: -8px 10px 0px -7px #ebebeb, 8px 10px 0px -7px #ebebeb;
+      -webkit-transition: box-shadow 0.3s;
+      transition: box-shadow 0.3s;
+    }
+
+    input[type=text]:focus {
+      outline: none;
+      box-shadow: -8px 10px 0px -7px #4EA6EA, 8px 10px 0px -7px #4EA6EA;
     }
 
     input::-webkit-input-placeholder { /* WebKit, Blink, Edge */

@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#fullpage').fullpage({
 		// anchors: ['hello', 'hashtag', 'goal', 'payment', 'done']
 		anchors: ['step-hello','step-campaign','step-goal', 'step-payment'],
-		sectionsColor: ['whitesmoke', '#1bbc9b', '#4BBFC3', '#7BAABE', 'whitesmoke'],
+		sectionsColor: ['whitesmoke', '#1bbc9b', '#4BBFC3', '#7BAABE'],
 		scrollingSpeed : 500,
 		menu : '#menu'
 	});
