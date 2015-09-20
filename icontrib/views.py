@@ -44,6 +44,8 @@ def create_campaign(request):
 
 def start(request):
     campaign_id = request.GET.get('c', '')
+    if len(campaign_id) == 0:
+        return redirect('campaign')
     next_url = "{}{}".format(
         reverse('setup_payment'),
         urlquote("?c=" + campaign_id),
