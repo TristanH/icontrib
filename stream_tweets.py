@@ -41,6 +41,7 @@ class MyStreamer(TwythonStreamer):
         if len(campaign_matches) != 1:
             # TODO: tweet here to let user know they mentioned multiple campaigns
             return
+        campaign_hashtag = campaign_matches[0]
 
         app_user = UserSocialAuth.objects.filter(uid=data['user']['id_str'])
         message = "ayy lmao"
