@@ -54,14 +54,13 @@ class MyStreamer(TwythonStreamer):
             contribution = Contribution()
             contribution.amount = campaign.contribution_amount  # TODO: un-hardcode contrib amt
             contribution.profile = app_user[0].user.userprofile
-            contribution.confirmed, errors = execute_contribution(contribution.profile, contribution.amount)
+            contribution.confirmed = execute_contribution(contribution.profile, contribution.amount)
             if contribution.confirmed:
                 # contribution was successful
                 message = "Congrats! You contributed ${0} to #{1}".format(contribution.amount, campaign.hashtag)
             else:
                 message = "Uh-oh! There was a problem with your contribution. " \
                           "Please make sure your payment info is correct."
-                print "Error with transaction: {}".format(errors)
             contribution.save()
 
         if 'retweeted_status' in data:

@@ -21,7 +21,7 @@ def execute_contribution(from_user_profile, contribution_amount):
         "customer_id": from_user_profile.braintree_customer_id,
         "amount": contribution_amount
     })
-    return result.is_success, result.errors
+    return result.is_success
 
 
 def generate_client_token():
