@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('#fullpage').fullpage({
+  $('#fullpage').fullpage({
 		// anchors: ['hello', 'hashtag', 'goal', 'payment', 'done']
 		anchors: ['step-hello','step-campaign','step-goal', 'step-payment'],
 		sectionsColor: ['whitesmoke', '#1bbc9b', '#4BBFC3', '#7BAABE'],
@@ -81,3 +81,4 @@ function  contribEventListener() {
     new_value = '$'+new_value;
 	cost.value = new_value
 }
+
