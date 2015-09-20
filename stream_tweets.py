@@ -63,7 +63,7 @@ class MyStreamer(TwythonStreamer):
             contribution.campaign = campaign
             if contribution.confirmed:
                 # contribution was successful
-                message = "@{} Congrats! You contributed ${} to #{}, we've now raised ${} out of ${}!".format(
+                message = "Congrats @{}! You contributed ${} to #{}, we've now raised ${} out of ${}!".format(
                     tweeter, contribution.amount, campaign.hashtag, campaign.amount_raised, campaign.target_amount
                 )
                 twitter.update_status(status=message)
