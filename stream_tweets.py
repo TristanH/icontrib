@@ -19,8 +19,6 @@ OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_t
 
 class MyStreamer(TwythonStreamer):
     def on_success(self, data):
-        import pdb; pdb.set_trace()
-
         tweeter = data.get('user', {}).get('screen_name')
         if not tweeter:
             tweeter = data.get('source', {}).get('screen_name')
@@ -74,8 +72,7 @@ class MyStreamer(TwythonStreamer):
         result = twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
 
     def on_error(self, status_code, data):
-        print status_code
-        import pdb; pdb.set_trace()
+        print str(data)
 
         # Want to stop trying to get data because of the error?
         # Uncomment the next line!
