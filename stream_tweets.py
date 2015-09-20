@@ -5,6 +5,9 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'icontrib.settings')
 
 from django.conf import settings
 
+import django
+django.setup()
+
 from icontrib.models import Campaign, Contribution
 
 from social.apps.django_app.default.models import UserSocialAuth
