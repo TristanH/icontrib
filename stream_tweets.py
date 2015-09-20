@@ -15,7 +15,7 @@ from twython import TwythonStreamer, Twython
 
 OAUTH_TOKEN = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token']
 OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token_secret']
-   
+
 
 class MyStreamer(TwythonStreamer):
     def on_success(self, data):
@@ -52,6 +52,9 @@ class MyStreamer(TwythonStreamer):
         else:
             campaign = Campaign.objects.get(hashtag=campaign_hashtag)
 
+            if campaign.organizer_profile == app_user[0].user.userprofile:
+                return  # We don't want a campaign organizer to donate to their own campaign
+
             contribution = Contribution()
             contribution.amount = campaign.contribution_amount  # TODO: un-hardcode contrib amt
             contribution.profile = app_user[0].user.userprofile
@@ -68,9 +71,8 @@ class MyStreamer(TwythonStreamer):
                 message = "@{} Uh-oh! There was a problem with your contribution. " \
                           "Please make sure your payment info is correct.".format(tweeter)
                 twitter.update_status(status=message, in_reply_to_status_id=data['id_str'])
-            
+
             contribution.save()
-            
 
 
     def on_error(self, status_code, data):
