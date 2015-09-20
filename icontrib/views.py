@@ -35,21 +35,21 @@ def create_campaign(request):
         organizer_profile_id=request.user.userprofile.id
     )
     tweet_text = "I just created a campaign: #{} Contribute ${} to it by retweeting or tagging @IWillContribute".format(campaign.hashtag)
-    return done(request, hashtag, tweet_text)
+    return campaign_created(request, hashtag, tweet_text)
 
 
 def start(request):
     return redirect("{}?next=/setup_payment/".format(reverse('social:begin', args=['twitter'])))
 
 
-def cc_form(request):
+def setup_payments(request):
     context = {
         'client_token': generate_client_token()
     }
     return render(request, 'setup_payment.html', context=context)
 
 
-def done(request, hashtag, tweet_text):
+def campaign_created(request, hashtag, tweet_text):
     return render(request, 'campaign_created.html', context=dict(
         hashtag=hashtag,
         tweet_text=tweet_text

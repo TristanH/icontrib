@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     url(r'^logout/$', 'icontrib.views.logout', name='logout'),
 
     url(r'^start/?$', 'icontrib.views.start', name='start'),
-    url(r'^setup_payment/?$', 'icontrib.views.cc_form', name='setup_payment'),
+    url(r'^setup_payment/?$', 'icontrib.views.setup_payments', name='setup_payment'),
 
     url(r'^create_campaign/?$', 'icontrib.views.create_campaign', name='create_campaign'),
 
