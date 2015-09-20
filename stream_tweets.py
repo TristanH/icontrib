@@ -1,10 +1,6 @@
 import os
-from payments.actions import execute_contribution
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'icontrib.settings')
-
 from django.conf import settings
-
 import django
 django.setup()
 
@@ -13,6 +9,7 @@ from twython import TwythonStreamer, Twython
 
 from icontrib.models import Campaign, Contribution
 from icontrib.utils import charge_user
+from payments.actions import execute_contribution
 
 OAUTH_TOKEN = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token']
 OAUTH_SECRET = UserSocialAuth.objects.get(uid="3609988267").extra_data['access_token']['oauth_token_secret']
